@@ -82,7 +82,7 @@ class Yaml extends File implements Driver
     {
         foreach ($mapping as $field => $fieldMapping) {
             if (isset($fieldMapping['gedmo'])) {
-                if (in_array('sortableGroup', $fieldMapping['gedmo'])) {
+                if (array_key_exists('sortableGroup', $fieldMapping['gedmo'])) {
                     if (!isset($config['groups'])) {
                         $config['groups'] = array();
                     }
