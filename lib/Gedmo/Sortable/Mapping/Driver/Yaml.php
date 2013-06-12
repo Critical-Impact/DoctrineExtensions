@@ -60,7 +60,7 @@ class Yaml extends File implements Driver
             foreach ($mapping['fields'] as $field => $fieldMapping) {
                 if (isset($fieldMapping['gedmo'])) {
 
-                    if (in_array('sortablePosition', $fieldMapping['gedmo'])) {
+                    if (array_key_exists('sortablePosition', $fieldMapping['gedmo'])) {
                         if (!$this->isValidField($meta, $field)) {
                             throw new InvalidMappingException("Sortable position field - [{$field}] type is not valid and must be 'integer' in class - {$meta->name}");
                         }

@@ -371,17 +371,18 @@ class SortableListener extends MappedEventSubscriber
     private function getMaxPosition($em, $entityLabel, $positionLabel, array $groups = array())
     {
         $maxPos = null;
-        $qb = $em->createQueryBuilder();
-        
-        $qb->select('MAX(n.'.$positionLabel.')')
-           ->from($entityLabel, 'n');
-        $qb = $this->addGroupWhere($qb, $groups);
-        $query = $qb->getQuery();
-        $query->useQueryCache(false);
-        $query->useResultCache(false);
-        $res = $query->getResult();
-        $maxPos = $res[0][1];
-        if (is_null($maxPos)) $maxPos = -1;
+
+            $qb = $em->createQueryBuilder();
+            $qb->select('COUNT(n)')
+                ->from($entityLabel, 'n');
+            $qb = $this->addGroupWhere($qb, $groups);
+            $query = $qb->getQuery();
+            $query->useQueryCache(false);
+            $query->useResultCache(false);
+            $res = $query->getResult();
+            $maxPos = $res[0][1];
+
+
         return $maxPos;
     }
     
